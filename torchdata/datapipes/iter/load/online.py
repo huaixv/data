@@ -111,6 +111,8 @@ def _get_response_from_google_drive(
 ) -> Tuple[str, StreamWrapper]:
     confirm_token = None
 
+    url = url.replace("drive.google.com/uc?", "drive.usercontent.google.com/download?")
+
     with requests.Session() as session:
         response = session.get(url, timeout=timeout, stream=True, **query_params)  # type: ignore[arg-type]
         response.raise_for_status()
